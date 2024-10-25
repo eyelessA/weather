@@ -113,12 +113,12 @@ export default {
     methods: {
         validateCity() {
             if (this.city === null || this.city.trim() === '') {
-                this.error = 'The ‘Search city’ field cannot be empty.'; // Выводим сообщение об ошибке
+                this.error = 'The ‘Search city’ field cannot be empty.';
             } else if (!/^[A-Za-zА-Яа-яЁё\s]+$/.test(this.city)) {
                 this.error = 'The city must contain only letters';
             } else {
-                this.error = null; // Очищаем ошибку, если поле заполнено
-                this.getWeather(); // Если поле заполнено, отправляем запрос
+                this.error = null;
+                this.getWeather();
             }
         },
 
@@ -145,22 +145,21 @@ export default {
         },
         convertTemperature(tempInKelvin) {
             if (!this.isKelvin) {
-                return (tempInKelvin - 273.15)// Конвертируем в Цельсий
+                return (tempInKelvin - 273.15)
             } else {
-                return (tempInKelvin) // Конвертируем в Кельвин
+                return (tempInKelvin)
             }
         },
         addRecentSearches(city) {
             this.recentSearches.push(city);
             this.lastSearch = city;
 
-            // Сохраняем массив и последний поиск в localStorage
             localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
             localStorage.setItem('lastSearch', city);
 
             if (this.recentSearches.length > 5) {
-                this.recentSearches.shift(); // Удаляем первый элемент, если длина массива больше 5
-                localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches)); // Обновляем данные в localStorage
+                this.recentSearches.shift();
+                localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
             }
         }
     }
