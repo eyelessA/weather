@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CityNotFoundException;
 use App\Http\Requests\Weather\WeatherRequest;
 use App\Services\getWeatherService;
 use Illuminate\Http\JsonResponse;
@@ -17,17 +18,12 @@ class WeatherController extends Controller
 
     public function getWeather(WeatherRequest $weatherRequest): JsonResponse
     {
-        $data = $weatherRequest->validated();
-        $apiKey = env('OPENWEATHER_API_KEY');
-
-        $weatherData = $this->getWeatherService->getWeather($data, $apiKey);
-
-        if (empty($weatherData)) {
-            return response()->json([
-                'error' => 'city not found'
-            ]);
-        } else {
+        $city = $weatherRequest->validated('city');
+        try {
+            $weatherData = $this->getWeatherService->getWeather($city);
             return response()->json($weatherData);
+        } catch (CityNotFoundException $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
         }
     }
 }

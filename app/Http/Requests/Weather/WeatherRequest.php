@@ -22,7 +22,7 @@ class WeatherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'city' => ['required', 'string'],
+            'city' => ['required', 'string', 'max:255'],
         ];
     }
 }
