@@ -27,5 +27,5 @@
 - php artisan serve
 - Создать .env
 - php artisan key:generate
-- В .env установить поле OPENWEATHER_API_KEY=(Ваш ключ из OpenWeatherMap)
+- В .env установить поле OPEN_WEATHER_API_KEY=(Ваш ключ из OpenWeatherMap)
 
