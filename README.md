@@ -24,3 +24,5 @@
 - `composer install`
 - `npm install`
 - `npm run dev`
+- php artisan serve
+- В .env установить поле OPENWEATHER_API_KEY=(Ваш ключ из OpenWeatherMap)
