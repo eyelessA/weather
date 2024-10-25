@@ -26,7 +26,7 @@ class WeatherController extends Controller
             return response()->json([
                 'error' => 'city not found'
             ]);
-        }else {
+        } else {
             return response()->json($weatherData);
         }
     }

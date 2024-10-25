@@ -3,16 +3,15 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Promise;
 
 class getWeatherService
 {
-    public function getWeather(array $data, $apiKey)
+    public function getWeather(array $data, $apiKey): array
     {
         $client = new Client();
-        $geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q={$data['city']}&limit=5&appid={$apiKey}";
+        $geoUrl = "https://api.openweathermap.org/geo/1.0/direct?q={$data['city']}&limit=5&appid={$apiKey}";
         $geoResponse = Http::get($geoUrl);
 
         $promises = [];

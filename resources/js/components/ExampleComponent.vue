@@ -114,7 +114,7 @@ export default {
                 this.error = 'The ‘Search city’ field cannot be empty.'; // Выводим сообщение об ошибке
             } else if (!/^[A-Za-zА-Яа-яЁё\s]+$/.test(this.city)) {
                 this.error = 'The city must contain only letters';
-            }else {
+            } else {
                 this.error = ''; // Очищаем ошибку, если поле заполнено
                 this.getWeather(); // Если поле заполнено, отправляем запрос
             }
