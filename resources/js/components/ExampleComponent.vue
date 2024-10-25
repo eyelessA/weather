@@ -101,7 +101,7 @@ export default {
     data() {
         return {
             city: null,
-            cities: [{}],
+            cities: [],
             selectedCity: null,
             isKelvin: true,
             error: null,
