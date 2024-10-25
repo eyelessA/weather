@@ -20,7 +20,7 @@
                                    placeholder="Search city"
                             />
                             <div
-                                v-if="cities.length > 1 && this.selectedCity === null"
+                                v-if="cities.length >= 1 && this.selectedCity === null"
                                 class="absolute left-0 z-10 mt-2 w-full origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                 <div class="py-1" role="none">
@@ -68,23 +68,23 @@
             </div>
 
             <div v-if="selectedCity"
-            class="mt-5 w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md py-2 shadow-sm">
-            <div class="bg-white p-7 rounded-md">
-                            <div>
-                                <h2 class="text-2xl font-bold mb-3">{{ selectedCity.name }}</h2>
+                 class="mt-5 w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md py-2 shadow-sm">
+                <div class="bg-white p-7 rounded-md">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-3">{{ selectedCity.name }}</h2>
 
-                                <p>Country: {{ selectedCity.sys.country }}</p>
-                                <p>
-                                    Temperature:
-                                    {{
-                                        isKelvin ? (convertTemperature(selectedCity.main.temp)).toFixed(0) + ' K' : (convertTemperature(selectedCity.main.temp)).toFixed(0) + ' °C'
-                                    }}
-                                </p>
-                                <p>Coordinates: {{ (selectedCity.coord.lat).toFixed(3) }}, {{
-                                        (selectedCity.coord.lon).toFixed(3)
-                                    }}</p>
-                                <p>Wind Speed: {{ (selectedCity.wind.speed + 'm/s') }}</p>
-                                <p>Weather Conditions: {{ (selectedCity.weather[0].description) }}</p>
+                        <p>Country: {{ selectedCity.sys.country }}</p>
+                        <p>
+                            Temperature:
+                            {{
+                                isKelvin ? (convertTemperature(selectedCity.main.temp)).toFixed(0) + ' K' : (convertTemperature(selectedCity.main.temp)).toFixed(0) + ' °C'
+                            }}
+                        </p>
+                        <p>Coordinates: {{ (selectedCity.coord.lat).toFixed(3) }}, {{
+                                (selectedCity.coord.lon).toFixed(3)
+                            }}</p>
+                        <p>Wind Speed: {{ (selectedCity.wind.speed + 'm/s') }}</p>
+                        <p>Weather Conditions: {{ (selectedCity.weather[0].description) }}</p>
                     </div>
                 </div>
             </div>
@@ -126,9 +126,9 @@ export default {
             this.selectedCity = null
             axios.post('/api/get-weather', {city: this.city})
                 .then(res => {
-                    for (let i = 0; i < (res.data.length); i++) {
-                        this.cities = res.data
-                    }
+                    this.cities = res.data
+                    console.log(res.data);
+
                     this.addRecentSearches(this.city)
                 })
                 .catch(error => {
